@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
-  base: ('/v1677-ht26-grupp5-frontend/'),
+  base: '/v1677-ht26-grupp5-frontend/',
 })
