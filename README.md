@@ -1,19 +1,68 @@
-# React + Vite
+# dv1677-ht26-grupp5-frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Gruppmedlemmar
 
-Currently, two official plugins are available:
+| Namn                 | GitHub        |
+| -------------------- | ------------- |
+| Rebaz Mohammad Ahmad | rebahama      |
+| Tuan Anh Pham        | tuananhpham95 |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## Om projektet
+Detta projekt är utvecklat med React, en backend har driftsats och sänder ut olika API routes som konsumeras i detta projekt. Målet är att skapa en modern frontend webbapplikationen som presenterar olika routes ifrån backenden. Repo projektet skapades med Vite som startgrund.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Kör lokalt
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+1. git clone <https://github.com/rebahama/dv1677-ht26-grupp5-frontend>
+2. cd dv1677-ht26-grupp5-frontend
+3. cp .env.example .env
+4. npm install
+5. npm run dev
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+**Miljövariabler** :
+
+| Variabel | Beskrivning |
+|----------|-------------|
+| VITE_API_URL | URL till backend-API:t |
+
+
+## Installera dependencies 
+
+1. npm install
+Detta installerar följande:
+
+* React
+* React Router DOM
+* Bootstrap
+* React Bootstrap
+
+
+## Bygga för produktion
+
+Kör i root foldern "npm run build"
+
+
+
+## Driftsatt
+
+- Frontend: https://grupp5.github.io/dv1677-ht26-grupp5-frontend
+- Backend: https://grupp5.jsramverk.se
+
+## Tillvägagångssätt
+
+Dokumentera löpande vad ni gjort och hur ni löst problem.
+
+- Vecka 3: React installerades och konfiguerades med hjälp av Vite, även React Bootstrap lades till för styling. React router dom lades till för att kunna navigera runt webbapplikationen. En display API sida React component skapades för att förberedas när API ifrån backend projektet konsumeras på frontenden.
+
+- Vecka 4:
+
+
+## Tekniker
+Projektet är byggd med:
+* React: 19.2.8
+* React Router Dom: 7.18.4
+* Bootstrap: 5.3.8
+* React Bootstrap: 2.10.10
+* Vite: 8.3.0
