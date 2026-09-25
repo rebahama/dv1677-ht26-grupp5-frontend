@@ -47,8 +47,8 @@ Kör i root foldern "npm run build"
 
 ## Driftsatt
 
-- Frontend: https://grupp5.github.io/dv1677-ht26-grupp5-frontend
-- Backend: https://grupp5.jsramverk.se
+- Frontend: https://rebahama.github.io/dv1677-ht26-grupp5-frontend
+- Backend:  https://dv1677-spock.nplab.bth.se
 
 ## Tillvägagångssätt
 
@@ -56,7 +56,7 @@ Dokumentera löpande vad ni gjort och hur ni löst problem.
 
 - Vecka 3: React installerades och konfiguerades med hjälp av Vite, även React Bootstrap lades till för styling. React router dom lades till för att kunna navigera runt webbapplikationen. En display API sida React component skapades för att förberedas när API ifrån backend projektet konsumeras på frontenden.
 
-- Vecka 4:
+- Vecka 4: När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
 
 
 ## Tekniker
@@ -66,3 +66,4 @@ Projektet är byggd med:
 * Bootstrap: 5.3.8
 * React Bootstrap: 2.10.10
 * Vite: 8.3.0
+* axios: 1.20.0
