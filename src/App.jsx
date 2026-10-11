@@ -5,6 +5,7 @@ import styles from './App.module.css'
 import NavBar from './components/NavBar'
 import HomePage from './webpage/HomePage'
 import DisplayApi from './webpage/DisplayApi'
+import RegisterPage from './webpage/auth/RegisterPage'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/showall" element={<DisplayApi />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </main>
     </>

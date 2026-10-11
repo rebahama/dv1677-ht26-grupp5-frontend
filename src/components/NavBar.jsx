@@ -9,6 +9,7 @@ function NavBar() {
       <Container>
         <Navbar.Brand as={Link} to="/" className={styles.navLink}>Homepage</Navbar.Brand>
         <Navbar.Brand as={Link} to="/showall" className={styles.navLink}>Display API</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/register" className={styles.navLink}>Register</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
