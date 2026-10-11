@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import api from '../../api/api';
 import styles from '../../styles/RegisterPage.module.css';
 
@@ -8,6 +9,7 @@ const RegisterPage = () => {
     const [message, setMessage] = useState("")
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
 
 
     const handleRegister = async (event) => {
@@ -27,6 +29,8 @@ const RegisterPage = () => {
             setSuccess(true);
             setEmail("");
             setPassword("");
+            navigate("/showall");
+            
         } catch (error) {
             setMessage(
                 error.response?.data?.message ||
