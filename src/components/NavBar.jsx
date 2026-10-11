@@ -33,6 +33,13 @@ function NavBar() {
                 </Navbar.Brand>
                 <Navbar.Brand
                   as={Link}
+                  to="/bookings"
+                  className={`mb-0 ${styles.navLink}`}
+                >
+                  My bookings
+                </Navbar.Brand>
+                <Navbar.Brand
+                  as={Link}
                   to="/login"
                   className={`mb-0 ${styles.navLink}`}
                   onClick={handleLogout}
