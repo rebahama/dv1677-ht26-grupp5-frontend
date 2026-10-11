@@ -29,7 +29,7 @@ const RegisterPage = () => {
             setSuccess(true);
             setEmail("");
             setPassword("");
-            navigate("/showall");
+            navigate("/login");
             
         } catch (error) {
             setMessage(
