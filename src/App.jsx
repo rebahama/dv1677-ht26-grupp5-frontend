@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <main className={styles.testing}>
+      <main >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/showall" element={<DisplayApi />} />
