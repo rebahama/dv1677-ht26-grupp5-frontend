@@ -15,7 +15,6 @@ Detta projekt är utvecklat med React, en backend har driftsats och sänder ut o
 
 1. git clone <https://github.com/rebahama/dv1677-ht26-grupp5-frontend>
 2. cd dv1677-ht26-grupp5-frontend
-3. cp .env.example .env
 4. npm install
 5. npm run dev
 
@@ -58,6 +57,9 @@ Dokumentera löpande vad ni gjort och hur ni löst problem.
 
 - Vecka 4: När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
 
+- Vecka 7: Påbörjades arbetet i frontend och att kunna skapa ett konto och logga in, ett context auth fil skapades så att man har tillgång till auth data och tokens på flera ställen i appen och som gör det lätt att importera och använda auth för att exempelvis veta vem som är inloggad och vems bookningar skall kunna synas samt sätta tokens. Ett my booking page skapades för att displaya användarens bookningar, endast användaren som är inloggad har tillgång till sina bookningar, om någon annan försöker gissa id på bookningen så får man ett unauthorized fel meddelandet på backenden. Konto skapades på webbplatsen och bokningar skapades till 2 olika konton, båda konton visar sina egna relevanta bokningar i my booking sidan och man kan inte se varandras bokningar.
+
+Bookningarna displayas med hjälp av BookingCardProps filen som destructar fieldsen ifrån backenden och sedan importeras den till my bookings där den loopas genom och identiferas med ett id samt displyar relevanta fields.
 
 ## Tekniker
 Projektet är byggd med:
