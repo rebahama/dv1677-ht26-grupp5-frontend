@@ -1,4 +1,5 @@
 import styles from "../styles/BookingCardProps.module.css";
+import linkStyles from "../styles/BookingDetailsProps.module.css";
 import { Link } from "react-router-dom";
 
 
@@ -25,7 +26,7 @@ const BookingCardProps = ({ booking }) => {
                         <p className={styles.infoValue}>{bookedBy}</p>
                     </div>
 
-                    <Link to={`/bookings/${_id}`}>
+                    <Link to={`/bookings/${_id}`} className={linkStyles.backLink }>
                         Click here to view details
                     </Link>
                 </div>

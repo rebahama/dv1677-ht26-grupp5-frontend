@@ -56,8 +56,6 @@ const BookingDetails = () => {
 
     return (
         <div>
-            <Link to="/bookings">Back to my bookings</Link>
-            <h1>Booking details</h1>
             <BookingDetailProp booking={booking} />
         </div>
     );

@@ -1,0 +1,30 @@
+.bookingCard {
+    max-width: 600px;
+    margin: 1.5rem auto;
+}
+
+.bookingCard p {
+    overflow-wrap: anywhere;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    color: #334155;
+    background: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.backLink:hover {
+    color: #2563eb;
+    border-color: #2563eb;
+    background: #f8fafc;
+    transform: translateX(-3px);
+}

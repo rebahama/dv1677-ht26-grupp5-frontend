@@ -36,7 +36,7 @@ const LoginPage = () => {
 
             login(user, token);
 
-            navigate("/showall");
+            navigate("/bookings");
         } catch (error) {
             setMessage(
                 error.response?.data?.error ||
