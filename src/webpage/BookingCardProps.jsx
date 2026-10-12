@@ -1,8 +1,9 @@
 import styles from "../styles/BookingCardProps.module.css";
+import { Link } from "react-router-dom";
 
 
 const BookingCardProps = ({ booking }) => {
-    const { resourceId, bookedBy, startsAt, endsAt } = booking;
+    const { resourceId, bookedBy, _id } = booking;
 
     return (
         <div className="col-12 col-md-6 col-xl-4 mb-4">
@@ -14,10 +15,6 @@ const BookingCardProps = ({ booking }) => {
                         </span>
                     </div>
 
-                    <h4 className={`card-title mb-4 ${styles.bookingTitle}`}>
-                        Booking details
-                    </h4>
-
                     <div className={styles.bookingInfo}>
                         <p className={styles.infoLabel}>Resource</p>
                         <p className={styles.infoValue}>{resourceId}</p>
@@ -28,19 +25,9 @@ const BookingCardProps = ({ booking }) => {
                         <p className={styles.infoValue}>{bookedBy}</p>
                     </div>
 
-                    <div className={styles.bookingInfo}>
-                        <p className={styles.infoLabel}>Starts at</p>
-                        <p className={styles.infoValue}>
-                            {new Date(startsAt).toLocaleString()}
-                        </p>
-                    </div>
-
-                    <div className={styles.bookingInfo}>
-                        <p className={styles.infoLabel}>Ends at</p>
-                        <p className={styles.infoValue}>
-                            {new Date(endsAt).toLocaleString()}
-                        </p>
-                    </div>
+                    <Link to={`/bookings/${_id}`}>
+                        Click here to view details
+                    </Link>
                 </div>
             </div>
         </div>

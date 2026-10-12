@@ -9,6 +9,7 @@ import RegisterPage from './webpage/auth/RegisterPage'
 import LoginPage from './webpage/auth/LoginPage'
 import MyBookings from './webpage/MyBookings'
 import ProtectedRoute from './components/ProtectRoute'
+import BookingDetails from './webpage/BookingDetails'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route path="/bookings" element={<MyBookings />} />
+            <Route path="/bookings/:id" element={<BookingDetails />} />
           </Route>
         </Routes>
       </main>
