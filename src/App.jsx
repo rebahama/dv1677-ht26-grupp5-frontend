@@ -8,6 +8,7 @@ import DisplayApi from './webpage/DisplayApi'
 import RegisterPage from './webpage/auth/RegisterPage'
 import LoginPage from './webpage/auth/LoginPage'
 import MyBookings from './webpage/MyBookings'
+import ProtectedRoute from './components/ProtectRoute'
 
 function App() {
 
@@ -21,7 +22,10 @@ function App() {
           <Route path="/showall" element={<DisplayApi />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/bookings" element={<MyBookings />} />
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="/bookings" element={<MyBookings />} />
+          </Route>
         </Routes>
       </main>
     </>
