@@ -19,14 +19,13 @@ const MyBookings = () => {
     }, []);
 
     return (
-        <div>
-            <h1>My bookings</h1>
-            {myBookings.map((booking) => (
-                <BookingCard
-                    key={booking._id}
-                    booking={booking}
-                />
-            ))}
+        <div className="container py-4">
+            <h1 className="text-center">My bookings</h1>
+            <div className="row">
+                {myBookings.map((booking) => (
+                    <BookingCard key={booking._id} booking={booking} />
+                ))}
+            </div>
         </div>
     );
 };
