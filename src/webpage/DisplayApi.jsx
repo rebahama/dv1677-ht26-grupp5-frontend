@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ResourceProps from "./ResourceProps";
 import api from "../api/api";
 
 const DisplayApi = () => {
@@ -17,15 +18,12 @@ const DisplayApi = () => {
     return (
         <div>
             <h1>Display resources API</h1>
+
             {resources.map((resource) => (
-                <div key={resource._id}>
-                    <p>Name: {resource.name}</p>
-                    <p>Type: {resource.type}</p>
-                    <p>Description: {resource.description}</p>
-                    <p>Capacity: {resource.capacity}</p>
-                    <p>Active: {resource.active ? "Yes" : "No"}</p>
-                    <p>Created at: {resource.createdAt}</p>
-                </div>
+                <ResourceProps
+                    key={resource._id}
+                    resource={resource}
+                />
             ))}
         </div>
     );
