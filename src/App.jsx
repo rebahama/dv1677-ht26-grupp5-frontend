@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectRoute'
 import BookingDetails from './webpage/BookingDetails'
 import CreateBooking from './webpage/CreateBooking'
 import DetaliedResources from './webpage/DetaliedResources'
+import SyncDatabase from './webpage/SyncDatabase'
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
             <Route path="/bookings" element={<MyBookings />} />
             <Route path="/bookings/detail/:id" element={<DetaliedResources />} />
             <Route path="/bookings/:id" element={<BookingDetails />} />
-            <Route path="/create/:id" element={<CreateBooking />} /> 
+            <Route path="/create/:id" element={<CreateBooking />} />
+            <Route path="/sync" element={<SyncDatabase />} />
           </Route>
         </Routes>
       </main>

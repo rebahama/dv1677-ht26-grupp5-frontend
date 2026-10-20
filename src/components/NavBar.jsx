@@ -47,6 +47,13 @@ function NavBar() {
                 >
                   Log out
                 </Navbar.Brand>
+                 <Navbar.Brand
+                  as={Link}
+                  to="/sync"
+                  className={`mb-0 ${styles.navLink}`}
+                >
+                  Sync and update database
+                </Navbar.Brand>
                 <span className="navbar-text">
                   Signed in as: {user.email}
                 </span>
