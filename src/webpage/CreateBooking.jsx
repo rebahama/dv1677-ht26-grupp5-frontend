@@ -114,101 +114,119 @@ const CreateBooking = () => {
     };
 
     return (
-        <div className="container py-4">
-            <h1>Create booking</h1>
-            <p>Resource ID: {id}</p>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="startsAt" className="form-label">
-                        Start date and time
-                    </label>
-                    <input
-                        id="startsAt"
-                        type="datetime-local"
-                        className="form-control"
-                        value={startsAt}
-                        onChange={(e) => setStartsAt(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="endsAt" className="form-label">
-                        End date and time
-                    </label>
-                    <input
-                        id="endsAt"
-                        type="datetime-local"
-                        className="form-control"
-                        value={endsAt}
-                        onChange={(e) => setEndsAt(e.target.value)}
-                        min={startsAt || undefined}
-                        required
-                    />
-                </div>
-                {resource?.provider !== "maas" && resource && (
-                    <>
-                        <h5>Resource requirements</h5>
-                        <div className="mb-3">
-                            <label htmlFor="vcpus" className="form-label">
-                                vCPUs
-                            </label>
-                            <input
-                                id="vcpus"
-                                type="number"
-                                className="form-control"
-                                min="1"
-                                value={vcpus}
-                                onChange={(e) => setVcpus(e.target.value)}
-                                required
-                            />
+        <div className="container py-5">
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-8 col-lg-6">
+                    <div className="card shadow-sm border-0">
+                        <div className="card-body p-4 p-md-5">
+                            <h1 className="h3 text-center mb-2">
+                                Create booking
+                            </h1>
+                            <p className="text-muted text-center mb-4">
+                                Select the dates and requirements for your booking.
+                            </p>
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="startsAt" className="form-label fw-semibold">
+                                        Start date and time
+                                    </label>
+                                    <input
+                                        id="startsAt"
+                                        type="datetime-local"
+                                        className="form-control form-control-lg"
+                                        value={startsAt}
+                                        onChange={(e) => setStartsAt(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="endsAt" className="form-label fw-semibold">
+                                        End date and time
+                                    </label>
+                                    <input
+                                        id="endsAt"
+                                        type="datetime-local"
+                                        className="form-control form-control-lg"
+                                        value={endsAt}
+                                        onChange={(e) => setEndsAt(e.target.value)}
+                                        min={startsAt || undefined}
+                                        required
+                                    />
+                                </div>
+                                {resource?.provider !== "maas" && resource && (
+                                    <>
+                                        <hr className="my-4" />
+                                        <h2 className="h5 mb-3">
+                                            Resource requirements
+                                        </h2>
+                                        <div className="mb-3">
+                                            <label htmlFor="vcpus" className="form-label fw-semibold">
+                                                vCPUs
+                                            </label>
+                                            <input
+                                                id="vcpus"
+                                                type="number"
+                                                className="form-control"
+                                                min="1"
+                                                value={vcpus}
+                                                onChange={(e) => setVcpus(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="ramMb" className="form-label fw-semibold">
+                                                RAM (MB)
+                                            </label>
+                                            <input
+                                                id="ramMb"
+                                                type="number"
+                                                className="form-control"
+                                                min="1"
+                                                value={ramMb}
+                                                onChange={(e) => setRamMb(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                                {resource?.provider === "proxmox" && (
+                                    <div className="mb-4">
+                                        <label htmlFor="diskGb" className="form-label fw-semibold">
+                                            Disk (GB)
+                                        </label>
+                                        <input
+                                            id="diskGb"
+                                            type="number"
+                                            className="form-control"
+                                            min="1"
+                                            value={diskGb}
+                                            onChange={(e) => setDiskGb(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                )}
+                                {message && (
+                                    <div
+                                        className="alert alert-info mt-3"
+                                        role="status"
+                                    >
+                                        {message}
+                                    </div>
+                                )}
+                                <div className="d-grid mt-4">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary btn-lg"
+                                        disabled={loading || !resource}
+                                    >
+                                        {loading ? "Creating booking..." : "Create booking"}
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="ramMb" className="form-label">
-                                RAM (MB)
-                            </label>
-
-                            <input
-                                id="ramMb"
-                                type="number"
-                                className="form-control"
-                                min="1"
-                                value={ramMb}
-                                onChange={(e) => setRamMb(e.target.value)}
-                                required
-                            />
-                        </div>
-                    </>
-                )}
-                {resource?.provider === "proxmox" && (
-                    <div className="mb-3">
-                        <label htmlFor="diskGb" className="form-label">
-                            Disk (GB)
-                        </label>
-
-                        <input
-                            id="diskGb"
-                            type="number"
-                            className="form-control"
-                            min="1"
-                            value={diskGb}
-                            onChange={(e) => setDiskGb(e.target.value)}
-                            required
-                        />
                     </div>
-                )}
-                {message && (
-                    <p role="status" className="mb-3">
-                        {message}
-                    </p>
-                )}
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={loading || !resource}
-                >
-                    {loading ? "Creating..." : "Create booking"}
-                </button>
-            </form>
+                </div>
+            </div>
         </div>
     );
 };
