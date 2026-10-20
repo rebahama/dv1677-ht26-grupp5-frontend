@@ -27,23 +27,20 @@ const DisplayApi = () => {
     return (
         <div className="container py-4">
             <h1 className="mb-4 text-center">Available resources</h1>
-
             {error && (
                 <div className="alert alert-danger" role="alert">
                     {error}
                 </div>
             )}
-
             {!error && resources.length === 0 && (
                 <p className="text-center text-muted">
                     No resources available.
                 </p>
             )}
-
-            <div className="row g-4">
+            <div className="row g-3">
                 {resources.map((resource) => (
                     <div
-                        className="col-12 col-md-6 col-xl-4"
+                        className="col-12 col-sm-6 col-lg-4 col-xxl-3"
                         key={resource._id}
                     >
                         <ResourceProps resource={resource} />
