@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api";
 
@@ -6,6 +7,7 @@ const CreateBooking = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [resource, setResource] = useState(null);
     const [startsAt, setStartsAt] = useState("");
     const [endsAt, setEndsAt] = useState("");
     const [vcpus, setVcpus] = useState(1);
@@ -13,6 +15,27 @@ const CreateBooking = () => {
     const [diskGb, setDiskGb] = useState(10);
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const { token } = useAuth();
+
+    useEffect(() => {
+        const getResource = async () => {
+            try {
+
+                const response = await api.get(`/resources/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setResource(response.data.resource ?? response.data);
+            } catch (error) {
+                console.error("Could not load resource:", error);
+                setMessage("Could not load resource details.");
+            }
+        };
+
+        getResource();
+    }, [id]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,27 +51,48 @@ const CreateBooking = () => {
             return;
         }
 
+        if (!resource) {
+            setMessage("Resource details are still loading.");
+            return;
+        }
+
+        const bookingData = {
+            resourceId: id,
+            startsAt: new Date(startsAt).toISOString(),
+            endsAt: new Date(endsAt).toISOString(),
+        };
+
+        if (resource.provider === "proxmox") {
+            bookingData.want = {
+                vcpus: Number(vcpus),
+                ramMb: Number(ramMb),
+                diskGb: Number(diskGb),
+            };
+        } else if (resource.provider === "openstack") {
+            bookingData.want = {
+                vcpus: Number(vcpus),
+                ramMb: Number(ramMb),
+            };
+        } else if (resource.provider !== "maas") {
+            setMessage("Unsupported resource provider.");
+            return;
+        }
+
         try {
             setLoading(true);
+
             const token = localStorage.getItem("token");
+
             const response = await api.post(
                 "/bookings",
-                {
-                    resourceId: id,
-                    startsAt: new Date(startsAt).toISOString(),
-                    endsAt: new Date(endsAt).toISOString(),
-                    want: {
-                        vcpus: Number(vcpus),
-                        ramMb: Number(ramMb),
-                        diskGb: Number(diskGb),
-                    },
-                },
+                bookingData,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 }
             );
+
             setMessage("Booking created successfully!");
             console.log("Booking response:", response.data);
 
@@ -73,7 +117,6 @@ const CreateBooking = () => {
         <div className="container py-4">
             <h1>Create booking</h1>
             <p>Resource ID: {id}</p>
-
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="startsAt" className="form-label">
@@ -102,49 +145,57 @@ const CreateBooking = () => {
                         required
                     />
                 </div>
-                <h5>Resource requirements</h5>
-                <div className="mb-3">
-                    <label htmlFor="vcpus" className="form-label">
-                        vCPUs
-                    </label>
-                    <input
-                        id="vcpus"
-                        type="number"
-                        className="form-control"
-                        min="1"
-                        value={vcpus}
-                        onChange={(e) => setVcpus(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="ramMb" className="form-label">
-                        RAM (MB)
-                    </label>
-                    <input
-                        id="ramMb"
-                        type="number"
-                        className="form-control"
-                        min="1"
-                        value={ramMb}
-                        onChange={(e) => setRamMb(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="diskGb" className="form-label">
-                        Disk (GB)
-                    </label>
-                    <input
-                        id="diskGb"
-                        type="number"
-                        className="form-control"
-                        min="1"
-                        value={diskGb}
-                        onChange={(e) => setDiskGb(e.target.value)}
-                        required
-                    />
-                </div>
+                {resource?.provider !== "maas" && resource && (
+                    <>
+                        <h5>Resource requirements</h5>
+                        <div className="mb-3">
+                            <label htmlFor="vcpus" className="form-label">
+                                vCPUs
+                            </label>
+                            <input
+                                id="vcpus"
+                                type="number"
+                                className="form-control"
+                                min="1"
+                                value={vcpus}
+                                onChange={(e) => setVcpus(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="ramMb" className="form-label">
+                                RAM (MB)
+                            </label>
+
+                            <input
+                                id="ramMb"
+                                type="number"
+                                className="form-control"
+                                min="1"
+                                value={ramMb}
+                                onChange={(e) => setRamMb(e.target.value)}
+                                required
+                            />
+                        </div>
+                    </>
+                )}
+                {resource?.provider === "proxmox" && (
+                    <div className="mb-3">
+                        <label htmlFor="diskGb" className="form-label">
+                            Disk (GB)
+                        </label>
+
+                        <input
+                            id="diskGb"
+                            type="number"
+                            className="form-control"
+                            min="1"
+                            value={diskGb}
+                            onChange={(e) => setDiskGb(e.target.value)}
+                            required
+                        />
+                    </div>
+                )}
                 {message && (
                     <p role="status" className="mb-3">
                         {message}
@@ -153,7 +204,7 @@ const CreateBooking = () => {
                 <button
                     type="submit"
                     className="btn btn-primary"
-                    disabled={loading}
+                    disabled={loading || !resource}
                 >
                     {loading ? "Creating..." : "Create booking"}
                 </button>

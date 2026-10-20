@@ -1,5 +1,8 @@
 import styles from "../styles/BookingDetailsProps.module.css";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api/api";
 
 const BookingDetailsProps = ({ booking }) => {
     const {
@@ -11,6 +14,35 @@ const BookingDetailsProps = ({ booking }) => {
         status,
         createdAt
     } = booking;
+
+    const { token } = useAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+
+    const handleDeleteBooking = async () => {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this booking?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            await api.delete(`/bookings/${_id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            navigate("/bookings");
+        } catch (err) {
+            setError(
+                err.response?.data?.error ||
+                "Failed to delete booking."
+            );
+        }
+    };
 
     return (
         <div className={`card shadow-sm ${styles.bookingCard}`}>
@@ -50,6 +82,12 @@ const BookingDetailsProps = ({ booking }) => {
                         <span aria-hidden="true"> </span> View detalied resources info
                     </Link>
                 </div>
+                 <button
+                        className="btn btn-danger mt-3"
+                        onClick={handleDeleteBooking}
+                    >
+                        Delete booking
+                    </button>
             </div>
         </div>
     );

@@ -30,7 +30,7 @@ function App() {
             <Route path="/bookings" element={<MyBookings />} />
             <Route path="/bookings/detail/:id" element={<DetaliedResources />} />
             <Route path="/bookings/:id" element={<BookingDetails />} />
-            <Route path="/create/:id" element={<CreateBooking />} />
+            <Route path="/create/:id" element={<CreateBooking />} /> 
           </Route>
         </Routes>
       </main>
