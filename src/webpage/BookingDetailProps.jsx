@@ -14,7 +14,7 @@ const BookingDetailsProps = ({ booking }) => {
 
     return (
         <div className={`card shadow-sm ${styles.bookingCard}`}>
-            <div className="card-body">
+            <div className="card-body p-4">
                 <h2 className="card-title mb-4">Detailed booking</h2>
                 <p><strong>Booking ID:</strong> {_id}</p>
                 <p><strong>Resource ID:</strong> {String(resourceId)}</p>
@@ -41,10 +41,15 @@ const BookingDetailsProps = ({ booking }) => {
                         {new Date(createdAt).toLocaleString()}
                     </p>
                 )}
+                <div className={`${styles.btnPos}`}>
+                    <Link to="/bookings" className={styles.backLink}>
+                        <span aria-hidden="true"> </span> Back to my bookings
+                    </Link>
 
-                <Link to="/bookings" className={styles.backLink}>
-                    <span aria-hidden="true"> </span> Back to my bookings
-                </Link>
+                    <Link to={`/bookings/detail/${resourceId}`} className={styles.backLink}>
+                        <span aria-hidden="true"> </span> View detalied resources info
+                    </Link>
+                </div>
             </div>
         </div>
     );

@@ -15,8 +15,8 @@
     margin-bottom: 1rem;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
-    color: #334155;
-    background: #fff;
+    color: #f1f2f5;
+    background: #242daa;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -109,4 +109,9 @@
 .resourceBookingButton:hover {
     background-color: #146c43;
     color: white;
+}
+
+.btnPos {
+    display: flex;
+    gap: 50px;
 }
