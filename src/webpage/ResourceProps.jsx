@@ -18,9 +18,6 @@ const ResourceDetailProp = ({ resource }) => {
                 <div className="row g-3">
                     <div className="col-md-6">
                         <p className="mb-2">
-                            <strong>ID:</strong> {_id}
-                        </p>
-                        <p className="mb-2">
                             <strong>Provider:</strong>{" "}
                             <span className="badge bg-info text-dark">
                                 {provider}
