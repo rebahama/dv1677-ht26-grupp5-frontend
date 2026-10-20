@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import ResourceProps from "./ResourceProps";
-import styles from "../styles/BookingDetailsProps.module.css";
+import ResourceProps from "./DisplayResourceDetailed";
 import api from "../api/api";
 
 const DetaliedResources = () => {
@@ -44,9 +43,6 @@ const DetaliedResources = () => {
             <div className="row justify-content-center">
                 <div className="col-12 col-md-8 col-lg-6">
                     <ResourceProps resource={resource} />
-                    <Link to="/bookings" className={styles.backLink}>
-                        Back to bookings
-                    </Link>
                 </div>
             </div>
         </div>

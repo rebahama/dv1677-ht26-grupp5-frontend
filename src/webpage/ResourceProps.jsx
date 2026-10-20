@@ -6,7 +6,8 @@ import { useAuth } from "../context/AuthContext";
 const ResourceDetailProp = ({ resource }) => {
     const { _id, name, provider, capacity } = resource;
     const { vcpus, ramMb, diskGb } = capacity || {};
-    const roundNumber = Math.round(ramMb)
+    const roundNumberRam = Math.round(ramMb)
+    const roundNumberDisk = Math.round(diskGb)
     const { user } = useAuth();
 
     return (
@@ -37,14 +38,14 @@ const ResourceDetailProp = ({ resource }) => {
                         <span>RAM</span>
                         <strong>
                             {ramMb != null
-                                ? `${Math.round(ramMb)} MB`
+                                ? `${roundNumberRam} MB`
                                 : "N/A"}
                         </strong>
                     </div>
                     {diskGb != null && (
                         <div className={styles.resourceCapacityRow}>
                             <span>Disk</span>
-                            <strong>{roundNumber} GB</strong>
+                            <strong>{roundNumberDisk} GB</strong>
                         </div>
                     )}
                 </div>

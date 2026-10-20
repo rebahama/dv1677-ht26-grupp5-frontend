@@ -23,9 +23,20 @@ const MyBookings = () => {
         <div className="container py-4">
             <h1 className="text-center">My bookings</h1>
             <div className="row">
-                {myBookings.map((booking) => (
-                    <BookingCard key={booking._id} booking={booking} />
-                ))}
+                {myBookings.length === 0 ? (
+                    <p className="text-center text-muted">
+                        There are no bookings yet.
+                    </p>
+                ) : (
+                    <div className="row">
+                        {myBookings.map((booking) => (
+                            <BookingCard
+                                key={booking._id}
+                                booking={booking}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );
