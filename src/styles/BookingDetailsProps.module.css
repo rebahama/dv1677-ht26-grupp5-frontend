@@ -113,5 +113,6 @@
 
 .btnPos {
     display: flex;
-    gap: 50px;
+    flex-direction: column;
+    width: 50%;
 }

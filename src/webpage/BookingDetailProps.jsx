@@ -81,6 +81,10 @@ const BookingDetailsProps = ({ booking }) => {
                     <Link to={`/bookings/detail/${resourceId}`} className={styles.backLink}>
                         <span aria-hidden="true"> </span> View detalied resources info
                     </Link>
+
+                    <Link to={`/bookings/update/${_id}`} className={styles.backLink}>
+                        <span aria-hidden="true"> </span> Update booking
+                    </Link>
                 </div>
                  <button
                         className="btn btn-danger mt-3"

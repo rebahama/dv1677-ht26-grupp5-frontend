@@ -11,7 +11,6 @@ const DisplayApi = () => {
             try {
                 const response = await api.get("/resources/broker/list");
                 setResources(response.data);
-                console.log(response.data);
             } catch (err) {
                 setError(
                     err.response?.data?.error ||

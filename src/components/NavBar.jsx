@@ -63,7 +63,7 @@ function NavBar() {
         ) : (
           <>
             <Navbar.Brand as={Link} to="/" className={styles.navLink}>
-              Homepage
+               Resources booking
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="main-navbar" />
             <Navbar.Collapse id="main-navbar">

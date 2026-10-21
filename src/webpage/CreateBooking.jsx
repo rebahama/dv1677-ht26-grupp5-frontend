@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api";
 
@@ -15,17 +14,12 @@ const CreateBooking = () => {
     const [diskGb, setDiskGb] = useState(10);
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
-    const { token } = useAuth();
 
     useEffect(() => {
         const getResource = async () => {
             try {
 
-                const response = await api.get(`/resources/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const response = await api.get(`/resources/${id}`);
 
                 setResource(response.data.resource ?? response.data);
             } catch (error) {
@@ -94,8 +88,6 @@ const CreateBooking = () => {
             );
 
             setMessage("Booking created successfully!");
-            console.log("Booking response:", response.data);
-
             navigate("/bookings");
         } catch (error) {
             console.error("Create booking error:", error);
