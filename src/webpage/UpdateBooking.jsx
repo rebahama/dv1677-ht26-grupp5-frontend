@@ -5,28 +5,27 @@ import api from "../api/api";
 const UpdateBooking = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-
-    const [endsAt, setEndsAt] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [endTime, setEndTime] = useState("");
     const [message, setMessage] = useState("");
-    const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const handleUpdate = async (event) => {
         event.preventDefault();
-        setLoading(true);
         setMessage("");
-        setSuccess(false);
+        if (!endDate || !endTime) {
+            setMessage("Please select an end date and time.");
+            return;
+        }
 
         try {
-
+            setLoading(true);
+            const endsAt = `${endDate}T${endTime}:00`;
             const response = await api.put(
                 `/bookings/${id}/end-time`,
-                {
-                    endsAt: new Date(endsAt).toISOString(),
-                }
+                { endsAt }
             );
 
-            setSuccess(true);
             setMessage(
                 response.data.message || "Booking end time updated."
             );
@@ -38,6 +37,7 @@ const UpdateBooking = () => {
 
             setMessage(
                 error.response?.data?.error ||
+                error.response?.data?.message ||
                 "Could not update booking end time."
             );
         } finally {
@@ -58,29 +58,65 @@ const UpdateBooking = () => {
                                 Choose a new end date and time for your booking.
                             </p>
                             <form onSubmit={handleUpdate}>
-                                <div className="mb-4">
+                                <div className="mb-3">
                                     <label
-                                        htmlFor="endsAt"
+                                        htmlFor="endDate"
                                         className="form-label fw-semibold"
                                     >
-                                        New end date and time
+                                        New end date
                                     </label>
                                     <input
-                                        id="endsAt"
-                                        type="datetime-local"
-                                        className="form-control form-control-lg"
-                                        value={endsAt}
-                                        onChange={(event) => setEndsAt(event.target.value)}
+                                        id="endDate"
+                                        type="date"
+                                        className="form-control"
+                                        value={endDate}
+                                        onChange={(event) =>
+                                            setEndDate(event.target.value)
+                                        }
                                         required
                                     />
                                 </div>
+                                <div className="mb-4">
+                                    <label
+                                        htmlFor="endTime"
+                                        className="form-label fw-semibold"
+                                    >
+                                        New end time
+                                    </label>
+                                    <select
+                                        id="endTime"
+                                        className="form-select form-select-lg"
+                                        value={endTime}
+                                        onChange={(event) =>
+                                            setEndTime(event.target.value)
+                                        }
+                                        required
+                                    >
+                                        <option value="">
+                                            Select end time
+                                        </option>
+                                        {Array.from(
+                                            { length: 10 },
+                                            (_, index) => {
+                                                const hour = index + 9;
+                                                const time =
+                                                    `${String(hour).padStart(2, "0")}:00`;
+                                                return (
+                                                    <option
+                                                        key={time}
+                                                        value={time}
+                                                    >
+                                                        {time}
+                                                    </option>
+                                                );
+                                            }
+                                        )}
+                                    </select>
+                                </div>
                                 {message && (
                                     <div
-                                        className={`alert ${success
-                                            ? "alert-success"
-                                            : "alert-danger"
-                                            }`}
-                                        role="status"
+                                        className="alert alert-danger"
+                                        role="alert"
                                     >
                                         {message}
                                     </div>
@@ -103,7 +139,5 @@ const UpdateBooking = () => {
             </div>
         </div>
     );
-
 };
-
 export default UpdateBooking;

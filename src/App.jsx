@@ -1,4 +1,3 @@
-
 import { Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/NavBar'
@@ -14,7 +13,6 @@ import SyncDatabase from './webpage/SyncDatabase'
 import UpdateBooking from './webpage/UpdateBooking'
 
 function App() {
-
 
   return (
     <>

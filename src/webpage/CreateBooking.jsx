@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Availability from "./Availability";
 import api from "../api/api";
 
 const CreateBooking = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-
     const [resource, setResource] = useState(null);
     const [startsAt, setStartsAt] = useState("");
     const [endsAt, setEndsAt] = useState("");
@@ -20,7 +20,6 @@ const CreateBooking = () => {
             try {
 
                 const response = await api.get(`/resources/${id}`);
-
                 setResource(response.data.resource ?? response.data);
             } catch (error) {
                 console.error("Could not load resource:", error);
@@ -30,6 +29,11 @@ const CreateBooking = () => {
 
         getResource();
     }, [id]);
+
+    const handleSelectSlot = (start, end) => {
+        setStartsAt(start);
+        setEndsAt(end);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -74,17 +78,9 @@ const CreateBooking = () => {
 
         try {
             setLoading(true);
-
-            const token = localStorage.getItem("token");
-
             const response = await api.post(
                 "/bookings",
-                bookingData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
+                bookingData
             );
 
             setMessage("Booking created successfully!");
@@ -111,40 +107,14 @@ const CreateBooking = () => {
                 <div className="col-12 col-md-8 col-lg-6">
                     <div className="card shadow-sm border-0">
                         <div className="card-body p-4 p-md-5">
-                            <h1 className="h3 text-center mb-2">
-                                Create booking
-                            </h1>
-                            <p className="text-muted text-center mb-4">
-                                Select the dates and requirements for your booking.
-                            </p>
+                            <p> Creating booking for {resource?.name} with external id: {resource?.externalId} </p>
+                            {resource && (
+                                <Availability
+                                    resourceId={resource._id}
+                                    onSelectSlot={handleSelectSlot}
+                                />
+                            )}
                             <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <label htmlFor="startsAt" className="form-label fw-semibold">
-                                        Start date and time
-                                    </label>
-                                    <input
-                                        id="startsAt"
-                                        type="datetime-local"
-                                        className="form-control form-control-lg"
-                                        value={startsAt}
-                                        onChange={(e) => setStartsAt(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="endsAt" className="form-label fw-semibold">
-                                        End date and time
-                                    </label>
-                                    <input
-                                        id="endsAt"
-                                        type="datetime-local"
-                                        className="form-control form-control-lg"
-                                        value={endsAt}
-                                        onChange={(e) => setEndsAt(e.target.value)}
-                                        min={startsAt || undefined}
-                                        required
-                                    />
-                                </div>
                                 {resource?.provider !== "maas" && resource && (
                                     <>
                                         <hr className="my-4" />
