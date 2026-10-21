@@ -2,16 +2,17 @@ import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom'
 import styles from '../styles/NavBar.module.css'
 import Navbar from 'react-bootstrap/Navbar';
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function NavBar() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
-
 
   return (
     <Navbar bg="primary" data-bs-theme="dark" expand="lg">
@@ -19,7 +20,7 @@ function NavBar() {
         {user ? (
           <>
             <Navbar.Brand as={Link} to="/" className={styles.navLink}>
-              Homepage
+              Resources booking
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="main-navbar" />
             <Navbar.Collapse id="main-navbar">
@@ -29,7 +30,7 @@ function NavBar() {
                   to="/showall"
                   className={`mb-0 ${styles.navLink}`}
                 >
-                  Display API
+                  Resources
                 </Navbar.Brand>
                 <Navbar.Brand
                   as={Link}
@@ -37,6 +38,13 @@ function NavBar() {
                   className={`mb-0 ${styles.navLink}`}
                 >
                   My bookings
+                </Navbar.Brand>
+                <Navbar.Brand
+                  as={Link}
+                  to="/sync"
+                  className={`mb-0 ${styles.navLink}`}
+                >
+                  Sync and update database
                 </Navbar.Brand>
                 <Navbar.Brand
                   as={Link}
@@ -55,11 +63,18 @@ function NavBar() {
         ) : (
           <>
             <Navbar.Brand as={Link} to="/" className={styles.navLink}>
-              Homepage
+               Resources booking
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="main-navbar" />
             <Navbar.Collapse id="main-navbar">
               <div className="d-flex align-items-center gap-3 ms-auto">
+                <Navbar.Brand
+                  as={Link}
+                  to="/showall"
+                  className={`mb-0 ${styles.navLink}`}
+                >
+                  Resources
+                </Navbar.Brand>
                 <Navbar.Brand
                   as={Link}
                   to="/login"

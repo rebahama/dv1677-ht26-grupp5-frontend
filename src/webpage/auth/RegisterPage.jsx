@@ -30,7 +30,7 @@ const RegisterPage = () => {
             setEmail("");
             setPassword("");
             navigate("/login");
-            
+
         } catch (error) {
             setMessage(
                 error.response?.data?.message ||
@@ -86,7 +86,7 @@ const RegisterPage = () => {
                         </div>
                         <button
                             type="submit"
-                            className={`btn btn-primary btn-lg w-100 fw-semibold ${styles.registerButton}`}
+                            className={`btn btn-primary w-100 fw-semibold ${styles.registerButton}`}
                             disabled={loading}
                         >
                             {loading ? "Creating account..." : "Create account"}
