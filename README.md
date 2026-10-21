@@ -57,9 +57,22 @@ Dokumentera löpande vad ni gjort och hur ni löst problem.
 
 - Vecka 4: När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
 
-- Vecka 7: Påbörjades arbetet i frontend och att kunna skapa ett konto och logga in, ett context auth fil skapades så att man har tillgång till auth data och tokens på flera ställen i appen och som gör det lätt att importera och använda auth för att exempelvis veta vem som är inloggad och vems bookningar skall kunna synas samt sätta tokens. Ett my booking page skapades för att displaya användarens bookningar, endast användaren som är inloggad har tillgång till sina bookningar, om någon annan försöker gissa id på bookningen så får man ett unauthorized fel meddelandet på backenden. Konto skapades på webbplatsen och bokningar skapades till 2 olika konton, båda konton visar sina egna relevanta bokningar i my booking sidan och man kan inte se varandras bokningar.
+- Vecka 7:
 
-Bookningarna displayas med hjälp av BookingCardProps filen som destructar fieldsen ifrån backenden och sedan importeras den till my bookings där den loopas genom och identiferas med ett id samt displyar relevanta fields.
+    Påbörjades arbetet i frontend och att kunna skapa ett konto och logga in, ett context auth fil skapades så att man har tillgång till auth data och tokens på flera ställen i appen och som gör det lätt att importera och använda auth för att exempelvis veta vem som är inloggad och vems bookningar skall kunna synas samt sätta tokens.
+
+    Ett my booking page skapades för att displaya användarens bookningar, endast användaren som är inloggad har tillgång till sina bookningar, om någon annan försöker gissa id på bookningen så får man ett unauthorized fel meddelandet på backenden. Konto skapades på webbplatsen och bokningar skapades till 2 olika konton, båda konton visar sina egna relevanta bokningar i my booking sidan och man kan inte se varandras bokningar.
+
+    Bookningarna displayas med hjälp av BookingCardProps filen som destructar fieldsen ifrån backenden och sedan importeras den till my bookings där den loopas genom och identiferas med ett id samt displyar relevanta fields.
+
+- Vecka 8:
+
+    När broker blev integrerad i backenden så kunde frontenden börja kommunicera med backenden som i sin tur kommunicerade med broker. Resrouces kan ifrån broker kan bokas med hjälp av webpage/CreateBooking.jsx filen. Här skickas relevanta fields till backenden som i sin tur skickar tillbaka ett svar. De flesta jsx filerna har skapats i props format, alltså en props fil har skapats som destructar relevanta fields och sedan skapas en till jsx fil som loopar över dessa props i .map funktionen och använder sig av key.id för att sedan displaya resultatet. Detta för att hålla koden organiserad och lättläst.
+
+- Vecka 9:
+
+    En synk sida har skapatas i SyncDatabase.jsx filen och där skickar den en anrop till backend som i sin tur skickar anrop till broker. Sedan skickas en uppdaterat databas lista som displays i resource sidan. En synk field lades till i resource databas för att visa för användaren när något synkades senast.
+
 
 ## Tekniker
 Projektet är byggd med:
