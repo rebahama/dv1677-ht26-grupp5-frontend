@@ -4,10 +4,15 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const ResourceDetailProp = ({ resource }) => {
-    const { _id, name, provider, capacity } = resource;
+    const { _id, name, provider, capacity, syncedAt } = resource;
     const { vcpus, ramMb, diskGb } = capacity || {};
     const roundNumberRam = Math.round(ramMb)
     const roundNumberDisk = Math.round(diskGb)
+    const syncDate = new Date(syncedAt);
+    const formattedSyncDate = syncDate.toLocaleString("sv-SE", {
+        dateStyle: "short",
+        timeStyle: "short",
+    });
     const { user } = useAuth();
 
     return (
@@ -46,6 +51,13 @@ const ResourceDetailProp = ({ resource }) => {
                         <div className={styles.resourceCapacityRow}>
                             <span>Disk</span>
                             <strong>{roundNumberDisk} GB</strong>
+                        </div>
+                    )}
+
+                     {syncedAt != null && (
+                        <div className={styles.resourceCapacityRow}>
+                            <span>Latest sync:</span>
+                            <strong>{formattedSyncDate}</strong>
                         </div>
                     )}
                 </div>

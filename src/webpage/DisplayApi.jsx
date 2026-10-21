@@ -6,20 +6,20 @@ const DisplayApi = () => {
     const [resources, setResources] = useState([]);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        const getResources = async () => {
-            try {
-                const response = await api.get("/resources/broker/list");
-                setResources(response.data);
-            } catch (err) {
-                setError(
-                    err.response?.data?.error ||
-                    "Failed to load resources. Please try again later."
-                );
-                console.error("Error fetching resources:", err);
-            }
-        };
+    const getResources = async () => {
+        try {
+            const response = await api.get("/resources/broker/list");
+            setResources(response.data);
+        } catch (err) {
+            setError(
+                err.response?.data?.error ||
+                "Failed to load resources. Please try again later."
+            );
+            console.error("Error fetching resources:", err);
+        }
+    };
 
+    useEffect(() => {
         getResources();
     }, []);
 

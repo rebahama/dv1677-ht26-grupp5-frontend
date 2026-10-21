@@ -6,7 +6,6 @@ const SyncDatabase = () => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
-    const { token } = useAuth();
 
     const handleSync = async (event) => {
         event.preventDefault();
@@ -14,23 +13,20 @@ const SyncDatabase = () => {
         setMessage("");
 
         try {
-            const response = await api.post(`/resources/broker`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await api.get("/resources/broker");
 
-            setMessage(
-                response.data.message || "Database synced successfully!"
-            );
-            setSuccess(true)
+            setMessage("Database synced successfully!");
+            setSuccess(true);
         } catch (error) {
             console.error("Database sync error:", error);
+
             setMessage(
                 error.response?.data?.error ||
                 error.response?.data?.message ||
                 "Could not sync database."
             );
+
+            setSuccess(false);
         } finally {
             setLoading(false);
         }
