@@ -12,7 +12,8 @@ const BookingDetailsProps = ({ booking }) => {
         startsAt,
         endsAt,
         status,
-        createdAt
+        createdAt,
+        want
     } = booking;
 
     const { token } = useAuth();
@@ -51,6 +52,23 @@ const BookingDetailsProps = ({ booking }) => {
                 <p><strong>Booking ID:</strong> {_id}</p>
                 <p><strong>Resource ID:</strong> {String(resourceId)}</p>
                 <p><strong>Booked by:</strong> {bookedBy}</p>
+                {want && (
+                    <div className="mb-3">
+                        <h5>Resource requirements</h5>
+
+                        <p>
+                            <strong>vCPUs:</strong> {want.vcpus}
+                        </p>
+
+                        <p>
+                            <strong>RAM:</strong> {want.ramMb} MB
+                        </p>
+
+                        <p className="mb-0">
+                            <strong>Disk:</strong> {want.diskGb} GB
+                        </p>
+                    </div>
+                )}
                 <p>
                     <strong>Starts at:</strong>
                     {new Date(startsAt).toLocaleString()}
@@ -86,12 +104,12 @@ const BookingDetailsProps = ({ booking }) => {
                         <span aria-hidden="true"> </span> Update booking
                     </Link>
                 </div>
-                 <button
-                        className="btn btn-danger mt-3"
-                        onClick={handleDeleteBooking}
-                    >
-                        Delete booking
-                    </button>
+                <button
+                    className="btn btn-danger mt-3"
+                    onClick={handleDeleteBooking}
+                >
+                    Delete booking
+                </button>
             </div>
         </div>
     );
