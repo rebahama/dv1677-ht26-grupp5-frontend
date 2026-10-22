@@ -11,6 +11,10 @@
 ## Om projektet
 Detta projekt är utvecklat med React, en backend har driftsats och sänder ut olika API routes som konsumeras i detta projekt. Målet är att skapa en modern frontend webbapplikationen som presenterar olika routes ifrån backenden. Repo projektet skapades med Vite som startgrund.
 
+Användaren kan göra en bokning på en resurs med hjälp av datum och tider, användaren kan också avboka en resurs. Resurserna hämtas ifrån backenden och backenden hämtar resurserna och kapaciteten ifrån en broker som agerar mellanhand.
+
+Användaren har också möjlighet att synka och uppdatera databasen med ett knapptryck, när denna knapp trycks så hämtas data ifrån broker och sedan uppdateras lokala databasen med data ifrån broker samt även en senaste synk tid uppdateras på själva resursen.
+
 ## Kör lokalt
 
 1. git clone <https://github.com/rebahama/dv1677-ht26-grupp5-frontend>
@@ -53,7 +57,7 @@ Kör i root foldern "npm run build"
 ## Funktionalitet
 
 #### Visa resurer:
-Här displayas alla resurer ifrån broken, man måste vara inloggad för att kunna skapa en bokning på resursen som visas.
+Här displayas alla resurser ifrån broken, man måste vara inloggad för att kunna skapa en bokning på resursen som visas.
 
 ![Visa resurer](./docs/webpage-02.png)
 
@@ -62,7 +66,7 @@ En detaljerad resurs:
 ![Visa resurer](./docs/webpage-14.png)
 
 
-#### Inloggning och registera konto
+#### Inloggning och registrera konto
 
 ![Visa resurer](./docs/webpage-01.png)
 
@@ -106,7 +110,7 @@ Och efter man har raderat bokningar.
 
 #### Synkronisera brooker data till lokala backend databas
 
-Avnändare kan synkronisera data ifrån broker till den lokala databasen, detta updaterar den befintliga databasen och lägger in den nya datan ifrån broker till databasen. När synken har lyckats så uppdateras även fieldsen som finns på resurser till att visa tid och datum när den senaste synken ägde rum.
+Användare kan synkronisera data ifrån broker till den lokala databasen, detta updaterar den befintliga databasen och lägger in den nya datan ifrån broker till databasen. När synken har lyckats så uppdateras även fieldsen som finns på resurser till att visa tid och datum när den senaste synken ägde rum.
 
 
 ![synka](./docs/webpage-12.png)
@@ -115,19 +119,49 @@ Avnändare kan synkronisera data ifrån broker till den lokala databasen, detta 
 
 ![synka](./docs/webpage-10.png)
 
+
+### Notifieringar
+
+När användare gör en bokning så kommer en notifiering upp på Discord, och när användaren gör en avbokning syns ytteligare notifiering.
+Logiken för detta sker i backenden men det är via frontenden när http koderna skickas med en knapptryck i gränsnittet för att boka och för att avboka som skickar till backenden.
+
+Skapa bokingar:
+
+![Bokning notifiering](./docs/notify.png)
+
+
+Avboka en bokning:
+
+![Bokning notifiering](./docs/notify-02.png)
+
 #### No permission
 
 Om användare föröker besöka skyddade routes syns följande:
 
 ![Bokningar](./docs/webpage-04.png)
 
+Om användare försöker besöka en annan användares boknings id, i detta fall besöker test-4 användare test-5 bokningar då visas inga bokningar eftersom att token inte är giltig på backenden.
+
+
+Detta är user: test-5 som är inloggad och är inne på en bokning som test-5 har gjort, boknings id är 6ada679c2ad76e30ee0d2835 i detta fall.
+
+![giltig token](./docs/webpage-19.png)
+
+Detta är user: test-4 som är inne på boknings sidan och lägger in boknings id ifrån test-5 i urlen då syns följande eftersom att token inte är giltig för inloggad konto:
+
+![ogiltig token](./docs/webpage-18.png)
+
 ## Tillvägagångssätt
 
 Dokumentera löpande vad ni gjort och hur ni löst problem.
 
-- Vecka 3: React installerades och konfiguerades med hjälp av Vite, även React Bootstrap lades till för styling. React router dom lades till för att kunna navigera runt webbapplikationen. En display API sida React component skapades för att förberedas när API ifrån backend projektet konsumeras på frontenden.
+- Vecka 3:
+ 
+    React installerades och konfiguerades med hjälp av Vite, även React Bootstrap lades till för styling. React router dom lades till för att kunna navigera runt webbapplikationen. En display API sida React component skapades för att förberedas när API ifrån backend projektet konsumeras på frontenden.
 
-- Vecka 4: När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel: VITE_API_URL för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
+- Vecka 4:
+ 
+    När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel: VITE_API_URL för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
 
 - Vecka 7:
 
