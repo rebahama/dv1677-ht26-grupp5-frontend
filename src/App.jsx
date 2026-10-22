@@ -11,6 +11,7 @@ import CreateBooking from './webpage/CreateBooking'
 import DetaliedResources from './webpage/DetaliedResources'
 import SyncDatabase from './webpage/SyncDatabase'
 import UpdateBooking from './webpage/UpdateBooking'
+import ConfirmDelete from './webpage/ConfirmDelete'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/create/:id" element={<CreateBooking />} />
             <Route path="/sync" element={<SyncDatabase />} />
             <Route path="/bookings/update/:id" element={< UpdateBooking />} />
+            <Route path="/bookings/delete/:id" element={< ConfirmDelete />} />
           </Route>
         </Routes>
       </main>
