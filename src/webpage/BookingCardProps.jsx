@@ -9,11 +9,13 @@ const BookingCardProps = ({ booking }) => {
     const endDate = new Date(endsAt);
 
     const formattedStartDate = startDate.toLocaleString("sv-SE", {
+        timeZone: "Europe/Stockholm",
         dateStyle: "short",
         timeStyle: "short",
     });
 
     const formattedEndDate = endDate.toLocaleString("sv-SE", {
+        timeZone: "Europe/Stockholm",
         dateStyle: "short",
         timeStyle: "short",
     });

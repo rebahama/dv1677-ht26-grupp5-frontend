@@ -9,6 +9,10 @@ const UpdateBooking = () => {
     const [endTime, setEndTime] = useState("");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const today = new Date();
+    const minDate = `${today.getFullYear()}-${String(
+        today.getMonth() + 1
+    ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
     const handleUpdate = async (event) => {
         event.preventDefault();
@@ -20,7 +24,9 @@ const UpdateBooking = () => {
 
         try {
             setLoading(true);
-            const endsAt = `${endDate}T${endTime}:00`;
+            const endsAt = new Date(
+                `${endDate}T${endTime}:00`
+            ).toISOString();
             const response = await api.put(
                 `/bookings/${id}/end-time`,
                 { endsAt }
@@ -70,6 +76,7 @@ const UpdateBooking = () => {
                                         type="date"
                                         className="form-control"
                                         value={endDate}
+                                        min={minDate}
                                         onChange={(event) =>
                                             setEndDate(event.target.value)
                                         }
