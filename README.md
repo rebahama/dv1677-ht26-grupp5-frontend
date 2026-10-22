@@ -99,13 +99,17 @@ Om kapaciteten överskrider det som broker har att erbjuda:
 
 ![Bokningar](./docs/webpage-13.png)
 
-Om man vill radera avboka och radera bokningar.
+Om man vill avboka och radera bokningar.
 
 ![Bokningar](./docs/webpage-16.png)
 
 Och efter man har raderat bokningar.
 
 ![Bokningar](./docs/webpage-17.png)
+
+Om man vill uppdatera en bokning där exempel klockan 17.00 den 24/10 är sluttiden men väljer en tid som är före den nuvarande bokningen.
+
+![Uppdatera bokning](./docs/webpage-20.png)
 
 
 #### Synkronisera brooker data till lokala backend databas
