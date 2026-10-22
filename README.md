@@ -95,6 +95,14 @@ Om kapaciteten överskrider det som broker har att erbjuda:
 
 ![Bokningar](./docs/webpage-13.png)
 
+Om man vill radera avboka och radera bokningar.
+
+![Bokningar](./docs/webpage-16.png)
+
+Och efter man har raderat bokningar.
+
+![Bokningar](./docs/webpage-17.png)
+
 
 #### Synkronisera brooker data till lokala backend databas
 
