@@ -1,4 +1,3 @@
-
 import { Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/NavBar'
@@ -12,9 +11,9 @@ import CreateBooking from './webpage/CreateBooking'
 import DetaliedResources from './webpage/DetaliedResources'
 import SyncDatabase from './webpage/SyncDatabase'
 import UpdateBooking from './webpage/UpdateBooking'
+import ConfirmDelete from './webpage/ConfirmDelete'
 
 function App() {
-
 
   return (
     <>
@@ -33,6 +32,7 @@ function App() {
             <Route path="/create/:id" element={<CreateBooking />} />
             <Route path="/sync" element={<SyncDatabase />} />
             <Route path="/bookings/update/:id" element={< UpdateBooking />} />
+            <Route path="/bookings/delete/:id" element={< ConfirmDelete />} />
           </Route>
         </Routes>
       </main>

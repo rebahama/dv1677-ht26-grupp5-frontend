@@ -49,13 +49,85 @@ Kör i root foldern "npm run build"
 - Frontend: https://rebahama.github.io/dv1677-ht26-grupp5-frontend
 - Backend:  https://dv1677-spock.nplab.bth.se
 
+
+## Funktionalitet
+
+#### Visa resurer:
+Här displayas alla resurer ifrån broken, man måste vara inloggad för att kunna skapa en bokning på resursen som visas.
+
+![Visa resurer](./docs/webpage-02.png)
+
+En detaljerad resurs:
+
+![Visa resurer](./docs/webpage-14.png)
+
+
+#### Inloggning och registera konto
+
+![Visa resurer](./docs/webpage-01.png)
+
+![Visa resurer](./docs/webpage-03.png)
+
+
+#### Boka resurs
+
+När användare är inloggad kan man skapa bokningar:
+
+![Bokningar](./docs/webpage-05.png)
+
+![Bokningar](./docs/webpage-09.png)
+
+Den detaljerade bokningen:
+
+![Bokningar](./docs/webpage-07.png)
+
+![Bokningar](./docs/webpage-08.png)
+
+Om man försöker boka samma resurs med samma tid som den första resursen som bokades syns följande time slot som är rött eftersom det redan finns en bokning den dagen och tiden.
+
+![Bokningar](./docs/webpage-06.png)
+
+Om man försöker boka en tid som är tidigare än dagens datum och tid.
+
+![Bokningar](./docs/webpage-15.png)
+
+Om kapaciteten överskrider det som broker har att erbjuda:
+
+![Bokningar](./docs/webpage-13.png)
+
+Om man vill radera avboka och radera bokningar.
+
+![Bokningar](./docs/webpage-16.png)
+
+Och efter man har raderat bokningar.
+
+![Bokningar](./docs/webpage-17.png)
+
+
+#### Synkronisera brooker data till lokala backend databas
+
+Avnändare kan synkronisera data ifrån broker till den lokala databasen, detta updaterar den befintliga databasen och lägger in den nya datan ifrån broker till databasen. När synken har lyckats så uppdateras även fieldsen som finns på resurser till att visa tid och datum när den senaste synken ägde rum.
+
+
+![synka](./docs/webpage-12.png)
+
+![synka](./docs/webpage-11.png)
+
+![synka](./docs/webpage-10.png)
+
+#### No permission
+
+Om användare föröker besöka skyddade routes syns följande:
+
+![Bokningar](./docs/webpage-04.png)
+
 ## Tillvägagångssätt
 
 Dokumentera löpande vad ni gjort och hur ni löst problem.
 
 - Vecka 3: React installerades och konfiguerades med hjälp av Vite, även React Bootstrap lades till för styling. React router dom lades till för att kunna navigera runt webbapplikationen. En display API sida React component skapades för att förberedas när API ifrån backend projektet konsumeras på frontenden.
 
-- Vecka 4: När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
+- Vecka 4: När API var driftsatt ifrån backenden kunde arbete påbörjas att konsumera APIn här i frontenden, en display api sida skapades och där API ifrån frontenden displayas och visar innehåll. Sedan lades variabel: VITE_API_URL för backendens url in i Githup pages och en workflow skapades för main. Stötte på lite problem när jag skulle deploya sidan men visade sig att vara felstavningar och routes som var problemet här. Var tvungen att även pusha till main pga felstavning för att säkerhetställa driftsättningen gick korrekt till och displayade rätt utan att skapa en 404 error.
 
 - Vecka 7:
 
@@ -71,7 +143,7 @@ Dokumentera löpande vad ni gjort och hur ni löst problem.
 
 - Vecka 9:
 
-    En synk sida har skapatas i SyncDatabase.jsx filen och där skickar den en anrop till backend som i sin tur skickar anrop till broker. Sedan skickas en uppdaterat databas lista som displays i resource sidan. En synk field lades till i resource databas för att visa för användaren när något synkades senast.
+    En synk sida har skapatas i SyncDatabase.jsx filen och där skickar den en anrop till backend som i sin tur skickar anrop till broker. Sedan skickas en uppdaterat databas lista som displays i resource sidan. En synk field lades till i resource databas för att visa för användaren när något synkades senast.En availability.jsx fil skapades för att anropa backenden där alla tillgänliga tider finns, om en variabel inte innehåller en viss tid så displays den tiden för användaren och om en variabel innehåller exemplevis en bokad tid så displays den tiden med att det inte går att boka just den tiden på en resurs.
 
 
 ## Tekniker

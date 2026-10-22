@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useParams } from "react-router-dom";
 import ResourceProps from "./DisplayResourceDetailed";
 import api from "../api/api";
 
@@ -8,16 +7,10 @@ const DetaliedResources = () => {
     const { id } = useParams();
     const [resource, setResource] = useState(null);
     const [error, setError] = useState("");
-    const { token } = useAuth();
     useEffect(() => {
         const getResource = async () => {
             try {
-                const response = await api.get(`/resources/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
+                const response = await api.get(`/resources/${id}`);
                 setResource(response.data.resource ?? response.data);
             } catch (err) {
                 setError(
@@ -28,7 +21,7 @@ const DetaliedResources = () => {
         };
 
         getResource();
-    }, [id, token]);
+    }, [id]);
 
     if (error) {
         return <div className="container py-4 alert alert-danger">{error}</div>;
