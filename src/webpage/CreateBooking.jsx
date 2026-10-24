@@ -14,6 +14,7 @@ const CreateBooking = () => {
     const [diskGb, setDiskGb] = useState(10);
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const getResource = async () => {
@@ -86,16 +87,20 @@ const CreateBooking = () => {
             setMessage("Booking created successfully!");
             navigate("/bookings");
         } catch (error) {
-            console.error("Create booking error:", error);
             console.error("Backend response:", error.response?.data);
-            console.error("HTTP status:", error.response?.status);
 
-            setMessage(
-                error.response?.data?.error ||
-                error.response?.data?.message ||
-                error.message ||
-                "Could not create booking."
-            );
+            const code = error.response?.data?.code;
+
+            if (code === "CAPACITY_EXCEEDED") {
+                setError("Booking denied: Not enough capacity available at the moment");
+            } else if (code === "ALREADY_BOOKED") {
+                setError("Booking denied: This machine is already booked for the period");
+            } else {
+                setError(
+                    error.response?.data?.error ||
+                    "Could not create booking. Please try again."
+                );
+            }
         } finally {
             setLoading(false);
         }
@@ -111,6 +116,7 @@ const CreateBooking = () => {
                             {resource && (
                                 <Availability
                                     resourceId={resource._id}
+                                    resourceType={resource.provider}
                                     onSelectSlot={handleSelectSlot}
                                 />
                             )}
@@ -173,6 +179,15 @@ const CreateBooking = () => {
                                         role="status"
                                     >
                                         {message}
+                                    </div>
+                                )}
+
+                                {error && (
+                                    <div
+                                        className="alert alert-info mt-3"
+                                        role="status"
+                                    >
+                                        {error}
                                     </div>
                                 )}
                                 <div className="d-grid mt-4">
