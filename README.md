@@ -135,7 +135,7 @@ Användare kan synkronisera data ifrån broker till den lokala databasen, detta 
 När användare gör en bokning så kommer en notifiering upp på Discord, och när användaren gör en avbokning syns ytteligare notifiering.
 Logiken för detta sker i backenden men det är via frontenden när http koderna skickas med en knapptryck i gränsnittet för att boka och för att avboka som skickar till backenden.
 
-Skapa bokingar:
+Skapa bokningar
 
 ![Bokning notifiering](./docs/notify.png)
 

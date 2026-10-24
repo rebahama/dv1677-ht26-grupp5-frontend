@@ -51,6 +51,7 @@ const UpdateBooking = () => {
         }
     };
 
+
     return (
         <div className="container py-5">
             <div className="row justify-content-center">
@@ -102,22 +103,15 @@ const UpdateBooking = () => {
                                         <option value="">
                                             Select end time
                                         </option>
-                                        {Array.from(
-                                            { length: 10 },
-                                            (_, index) => {
-                                                const hour = index + 9;
-                                                const time =
-                                                    `${String(hour).padStart(2, "0")}:00`;
-                                                return (
-                                                    <option
-                                                        key={time}
-                                                        value={time}
-                                                    >
-                                                        {time}
-                                                    </option>
-                                                );
-                                            }
-                                        )}
+                                        {Array.from({ length: 10 }, (_, index) => {
+                                            const hour = index + 8;
+                                            const time = `${String(hour + 1).padStart(2, "0")}:00`;
+                                            return (
+                                                <option key={time} value={time}>
+                                                    {`${String(hour).padStart(2, "0")}:00–${time}`}
+                                                </option>
+                                            );
+                                        })}
                                     </select>
                                 </div>
                                 {message && (
