@@ -16,16 +16,6 @@ const Availability = ({ resourceId, onSelectSlot, resourceType }) => {
         String(today.getDate()).padStart(2, "0"),
     ].join("-");
 
-    const selectMaasDates = (startDate, finishDate) => {
-        if (!startDate || !finishDate || finishDate < startDate) {
-            onSelectSlot("", "");
-            return;
-        }
-        const startsAt = new Date(`${startDate}T00:00:00.000Z`);
-        const endsAt = new Date(`${finishDate}T00:00:00.000Z`);
-        onSelectSlot(startsAt.toISOString(), endsAt.toISOString());
-    };
-
     useEffect(() => {
         if (!resourceId || !date) return;
 
@@ -104,7 +94,6 @@ const Availability = ({ resourceId, onSelectSlot, resourceType }) => {
 
         const toDateTime = (timestamp) => {
             const value = new Date(timestamp);
-
             const datePart = [
                 value.getFullYear(),
                 String(value.getMonth() + 1).padStart(2, "0"),
@@ -134,112 +123,76 @@ const Availability = ({ resourceId, onSelectSlot, resourceType }) => {
 
         const validEndDate =
             endDate && endDate >= start ? endDate : "";
-
         setEndDate(validEndDate);
-        selectMaasDates(start, validEndDate);
-    };
-
-    const handleMaasEndDate = (event) => {
-        const end = event.target.value;
-        setEndDate(end);
-        selectMaasDates(date, end);
+        onSelectSlot("", "");
     };
 
     return (
         <div className="mb-4">
             <h5>Equipment Availability</h5>
-
-            {resourceType === "maas" ? (
-                <>
-                    <div className="mb-3">
-                        <label htmlFor="maas-start-date" className="form-label">
-                            Start date
-                        </label>
-                        <input
-                            id="maas-start-date"
-                            type="date"
-                            className="form-control"
-                            value={date}
-                            min={minDate}
-                            onChange={handleMaasStartDate}
-                            required
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="maas-end-date" className="form-label">
-                            End date
-                        </label>
-                        <input
-                            id="maas-end-date"
-                            type="date"
-                            className="form-control"
-                            value={endDate}
-                            min={date || minDate}
-                            onChange={handleMaasEndDate}
-                            required
-                        />
-                    </div>
-                </>
-            ) : (
-                <>
-                    <label htmlFor="availability-date" className="form-label">
-                        Select booking date
+            <>
+                <div className="mb-3">
+                    <label htmlFor="maas-start-date" className="form-label">
+                        Start date
                     </label>
                     <input
-                        id="availability-date"
+                        id="maas-start-date"
                         type="date"
-                        className="form-control mb-3"
+                        className="form-control"
                         value={date}
                         min={minDate}
-                        onChange={(event) => {
-                            setDate(event.target.value);
-                            setSelectedSlot("");
-                            onSelectSlot("", "");
-                        }}
+                        onChange={handleMaasStartDate}
                         required
                     />
-                    {loading && <p>Loading availability...</p>}
-                    {error && <p className="text-danger">{error}</p>}
-                    {!date && <p>Select a date to see available times.</p>}
-                    {!loading && date && !error && (
-                        <>
-                            <p className="text-info">
-                                Selected booking date: {date}
-                            </p>
-                            <div className="d-flex flex-wrap gap-2">
-                                {slots.map((slot) => {
-                                    const selected =
-                                        selectedSlot === slot.label;
-                                    const color = slot.isBooked
-                                        ? "warning"
-                                        : !slot.isAvailable
-                                            ? "danger"
-                                            : "success";
-                                    return (
-                                        <button
-                                            key={slot.label}
-                                            type="button"
-                                            className={`btn btn-outline-${color}${selected ? " active" : ""
-                                                }`}
-                                            onClick={() => selectSlot(slot)}
-                                        >
-                                            {slot.label}
-                                            {slot.isBooked
-                                                ? " (Booked)"
-                                                : !slot.isAvailable
-                                                    ? " (Unavailable)"
-                                                    : selected
-                                                        ? " (Selected)"
-                                                        : ""}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </>
-                    )}
-                </>
-            )}
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="maas-end-date" className="form-label">
+                        End date
+                    </label>
+                </div>
+                {loading && <p>Loading availability...</p>}
+                {error && <p className="text-danger">{error}</p>}
+                {!date && <p>Select a date to see available times.</p>}
+                {!loading && date && !error && (
+                    <>
+                        <p className="text-info">
+                            Selected booking date: {date}
+                        </p>
+                        <div className="d-flex flex-wrap gap-2">
+                            {slots.map((slot) => {
+                                const selected =
+                                    selectedSlot === slot.label;
+                                const unavailable =
+                                    !slot.isAvailable ||
+                                    (resourceType === "maas" && slot.isBooked);
+                                const color = unavailable
+                                    ? "danger"
+                                    : selected
+                                        ? "success"
+                                        : "outline-success";
+                                return (
+                                    <button
+                                        key={slot.label}
+                                        type="button"
+                                        disabled={unavailable}
+                                        className={`btn btn-outline-${color}${selected ? " active" : ""
+                                            }`}
+                                        onClick={() => selectSlot(slot)}
+                                    >
+                                        {slot.label}
+                                        {slot.isBooked ? " (Booked)"
+                                            : !slot.isAvailable
+                                                ? " (Unavailable)"
+                                                : selected
+                                                    ? " (Selected)"
+                                                    : ""}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </>
+                )}
+            </>
         </div>
     );
 };
