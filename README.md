@@ -81,6 +81,20 @@ När användare är inloggad kan man skapa bokningar:
 
 ![Bokningar](./docs/webpage-09.png)
 
+Innan man skapar en bokning kan man se en tillgänglig för nuvarande bokningar som hämtas ifrån den gemensamma infrastrukturen som alla grupper använder ifrån broker.
+
+Frontenden anropar backenden och backenden anropar broker som har url: "X-Booker-Group: $TOKEN" $URL/typ/availability där typ=proxmox,maas, openstack.
+
+Live värden av tillgängliga resurser för Proxmox och Openstack som displayar siffror över hur många grupper som har bokat resurserna:
+
+![kapacitet](./docs/webpage-22.png)
+
+![Bokningar](./docs/webpage-24.png)
+
+För Maas:
+![Bokningar](./docs/webpage-23.png)
+
+
 Den detaljerade bokningen:
 
 ![Bokningar](./docs/webpage-07.png)
@@ -88,7 +102,6 @@ Den detaljerade bokningen:
 ![Bokningar](./docs/webpage-08.png)
 
 Om man försöker boka en MAAS resurs med samma datum får man följande fel.
-
 
 
 ![Bokningar](./docs/webpage-06.png)
@@ -114,9 +127,6 @@ Om man vill uppdatera en bokning där exempel klockan 17.00 den 24/10 är slutti
 ![Uppdatera bokning](./docs/webpage-20.png)
 
 
-Om man besöker en MAAS sida ser det annourlunda ut då man väljer datum istället för tid som på Openstack och Proxmox
-
-![MAAS](./docs/webpage-21.png)
 
 #### Synkronisera brooker data till lokala backend databas
 
