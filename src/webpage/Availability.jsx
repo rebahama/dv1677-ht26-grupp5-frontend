@@ -240,14 +240,6 @@ const Availability = ({ resourceId, onSelectSlot, resourceType }) => {
                                     );
                                 })}
                             </div>
-                            <div className="small mt-3">
-                                <p className="text-success mb-1">
-                                    Green: Available to book.
-                                </p>
-                                <p className="text-danger mb-0">
-                                    Red: Not available for the full hour.
-                                </p>
-                            </div>
                         </>
                     )}
                 </>
