@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Availability from "./Availability";
+import Capacity from "./Capacity";
 import api from "../api/api";
 
 const CreateBooking = () => {
@@ -113,6 +114,7 @@ const CreateBooking = () => {
                     <div className="card shadow-sm border-0">
                         <div className="card-body p-4 p-md-5">
                             <p> Creating booking for {resource?.name} with external id: {resource?.externalId} </p>
+                            <Capacity resource={resource} />
                             {resource && (
                                 <Availability
                                     resourceId={resource._id}

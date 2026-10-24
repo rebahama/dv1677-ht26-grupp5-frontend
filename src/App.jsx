@@ -12,6 +12,7 @@ import DetaliedResources from './webpage/DetaliedResources'
 import SyncDatabase from './webpage/SyncDatabase'
 import UpdateBooking from './webpage/UpdateBooking'
 import ConfirmDelete from './webpage/ConfirmDelete'
+import Capacity from './webpage/Capacity'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/showall" element={<DisplayApi />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path ="/showall/capacity:id" element={<Capacity />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/bookings" element={<MyBookings />} />
