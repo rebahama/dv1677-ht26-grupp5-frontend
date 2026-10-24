@@ -21,13 +21,8 @@ const Availability = ({ resourceId, onSelectSlot, resourceType }) => {
             onSelectSlot("", "");
             return;
         }
-
-        const startsAt = new Date(`${startDate}T00:00:00`);
-        const endsAt = new Date(`${finishDate}T00:00:00`);
-
-
-        endsAt.setDate(endsAt.getDate() + 1);
-
+        const startsAt = new Date(`${startDate}T00:00:00.000Z`);
+        const endsAt = new Date(`${finishDate}T00:00:00.000Z`);
         onSelectSlot(startsAt.toISOString(), endsAt.toISOString());
     };
 
