@@ -87,7 +87,9 @@ Den detaljerade bokningen:
 
 ![Bokningar](./docs/webpage-08.png)
 
-Om man försöker boka samma resurs med samma tid som den första resursen som bokades syns följande time slot som är rött eftersom det redan finns en bokning den dagen och tiden.
+Om man försöker boka en MAAS resurs med samma datum får man följande fel.
+
+
 
 ![Bokningar](./docs/webpage-06.png)
 
@@ -111,6 +113,10 @@ Om man vill uppdatera en bokning där exempel klockan 17.00 den 24/10 är slutti
 
 ![Uppdatera bokning](./docs/webpage-20.png)
 
+
+Om man besöker en MAAS sida ser det annourlunda ut då man väljer datum istället för tid som på Openstack och Proxmox
+
+![MAAS](./docs/webpage-21.png)
 
 #### Synkronisera brooker data till lokala backend databas
 
