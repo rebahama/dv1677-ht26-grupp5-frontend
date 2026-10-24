@@ -222,10 +222,6 @@ const Availability = ({ resourceId, onSelectSlot, resourceType }) => {
                                             type="button"
                                             className={`btn btn-outline-${color}${selected ? " active" : ""
                                                 }`}
-                                            disabled={
-                                                !slot.isAvailable ||
-                                                slot.isBooked
-                                            }
                                             onClick={() => selectSlot(slot)}
                                         >
                                             {slot.label}
