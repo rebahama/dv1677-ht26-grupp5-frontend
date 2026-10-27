@@ -94,6 +94,9 @@ Live värden av tillgängliga resurser för Proxmox och Openstack som displayar 
 För Maas:
 ![Bokningar](./docs/webpage-23.png)
 
+När tiden för den bokade MAAS resursen slår in, då visar available capacity siffran 4 istället för 5 eftersom att en MAAS är bokad.:
+
+![Bokningar](./docs/webpage-25.png)
 
 Den detaljerade bokningen:
 
