@@ -1,0 +1,73 @@
+.registerPage {
+    min-height: 85vh;
+    background-color: #f4f7fb;
+}
+
+.registerCard {
+    max-width: 440px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 12px 40px rgba(20, 40, 80, 0.08) !important;
+}
+
+.title {
+    color: #17243b;
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: #6b778c;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.input {
+    min-height: 48px;
+    border-color: #dce3ed;
+    border-radius: 10px;
+    background-color: #fbfcfe;
+    font-size: 0.95rem;
+}
+
+.input:focus {
+    border-color: #5278f4;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(82, 120, 244, 0.12);
+}
+
+.registerButton {
+    min-height: 48px;
+    border-radius: 10px;
+    background-color: #315fe8;
+    border-color: #315fe8;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.registerButton:hover {
+    background-color: #244bc2;
+    border-color: #244bc2;
+    transform: translateY(-1px);
+}
+
+.registerButton:focus-visible {
+    box-shadow: 0 0 0 4px rgba(82, 120, 244, 0.25);
+}
+
+.message {
+    overflow-wrap: anywhere;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .registerPage {
+        min-height: 75vh;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .title {
+        font-size: 1.55rem;
+    }
+}
